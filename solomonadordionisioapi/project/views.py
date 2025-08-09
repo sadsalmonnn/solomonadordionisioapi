@@ -1,0 +1,8 @@
+from rest_framework import viewsets
+from .models import Project
+from .serializers import ProjectSerializer
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+
+class ProjectViewSet(viewsets.ModelViewSet):
+    queryset = Project.objects.prefetch_related('tags').all()
+    serializer_class = ProjectSerializer

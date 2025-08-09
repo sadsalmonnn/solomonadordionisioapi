@@ -19,12 +19,16 @@ from django.contrib import admin
 from rest_framework.routers import DefaultRouter
 from django.urls import include, path
 from experience.views import ExperienceViewSet
+from django.shortcuts import redirect
+from project.views import ProjectViewSet
 
 
 router = DefaultRouter()
 router.register(r'experience', ExperienceViewSet)
+router.register(r'project', ProjectViewSet)
 
 urlpatterns = [
+    path('', lambda request: redirect('api/', permanent=False)),  # Redirect root to /api/
     path('admin/', admin.site.urls),
-    path('api/', include((router.urls, 'experience'), namespace='experience')),
+    path('api/', include(router.urls)), 
 ]
