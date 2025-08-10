@@ -134,5 +134,3 @@ REST_FRAMEWORK = {
     # 	'rest_framework.authentication.TokenAuthentication',
     # ],
 }
-
-GOOGLE_API_KEY = "AIzaSyBb_JLwYKLmBv9JMW3m13leIiE4o3i9rRM"
