@@ -43,8 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'experience',
-    'project'
-
+    'project',
+    'resume'
 ]
 
 MIDDLEWARE = [
@@ -134,3 +134,5 @@ REST_FRAMEWORK = {
     # 	'rest_framework.authentication.TokenAuthentication',
 	# ],
 }
+
+GOOGLE_API_KEY="AIzaSyBb_JLwYKLmBv9JMW3m13leIiE4o3i9rRM"
