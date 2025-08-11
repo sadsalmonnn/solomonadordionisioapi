@@ -22,17 +22,18 @@ from django.urls import include, path
 from experience.views import ExperienceViewSet
 from django.shortcuts import redirect
 from project.views import ProjectViewSet
+from resume.views import ResumeViewSet
 
 
 router = DefaultRouter()
 router.register(r"experience", ExperienceViewSet)
 router.register(r"project", ProjectViewSet)
+router.register(r"resume", ResumeViewSet, basename="resume")
 
 urlpatterns = [
     path(
         "", lambda request: redirect("api/", permanent=False)
-    ),  # Redirect root to /api/
+    ),
     path("admin/", admin.site.urls),
     path("api/", include(router.urls)),
-    path("api/resume/", include("resume.urls")),
 ]

@@ -1,16 +1,18 @@
-from rest_framework.decorators import api_view
+from rest_framework import viewsets, status
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
-from rest_framework import status
 from .models import Resume
 from .serializer import ResumeSerializer
-# Create your views here.
 
-@api_view(['GET'])
-def get_resume(request):
-    try:
+
+class ResumeViewSet(viewsets.ViewSet):
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    serializer_class = ResumeSerializer
+
+    def list(self, request):
         resume = Resume.objects.first()
         if not resume:
-            return Response({"detail": "Resume not found."}, status=404)
-        return Response(ResumeSerializer(resume).data, status=200)
-    except Exception as e:
-        return Response({"detail": str(e)}, status=500)
+            return Response(
+                {"detail": "Resume not found."}, status=status.HTTP_404_NOT_FOUND
+            )
+        return Response(ResumeSerializer(resume).data, status=status.HTTP_200_OK)
