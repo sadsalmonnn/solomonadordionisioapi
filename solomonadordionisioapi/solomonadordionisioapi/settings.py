@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     "experience",
     "project",
     "resume",
+    "link",
+    
 ]
 
 MIDDLEWARE = [
