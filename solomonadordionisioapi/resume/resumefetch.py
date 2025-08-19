@@ -13,7 +13,6 @@ def fetch_and_update_resume():
 
         service = build("drive", "v3", credentials=credentials)
 
-        # Get the file metadata (for modified time)
         file_metadata = (
             service.files()
             .get(
@@ -24,7 +23,6 @@ def fetch_and_update_resume():
         )
         date_modified = file_metadata.get("modifiedTime")
 
-        # Get the export link for PDF (Google Docs files require export)
         resumefile_dic = (
             service.files()
             .download(
@@ -37,13 +35,11 @@ def fetch_and_update_resume():
         download_uri = resumefile_dic["response"]["downloadUri"]
         print(download_uri)
 
-        # Import here to avoid app loading issues
         from .models import Resume
 
-        resume, created = Resume.objects.get_or_create(id=1)
-        resume.resume_uri = download_uri
-        resume.date = date_modified
-        resume.save()
+        last_resume = Resume.objects.order_by("-date").first()
+        if not last_resume or last_resume.date != date_modified:
+            Resume.objects.create(resume_uri=download_uri, date=date_modified)
 
     except Exception as e:
         print(f"Error fetching resume in ready(): {e}")

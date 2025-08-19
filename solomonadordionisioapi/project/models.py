@@ -1,6 +1,7 @@
 from django.db import models
 from tag.models import Tag
 
+
 class Project(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()

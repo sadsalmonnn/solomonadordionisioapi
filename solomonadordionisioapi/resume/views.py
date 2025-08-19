@@ -6,16 +6,17 @@ from rest_framework.authentication import SessionAuthentication, BasicAuthentica
 from rest_framework.permissions import IsAuthenticated
 
 
-
 class ResumeViewSet(viewsets.ViewSet):
     authentication_classes = [SessionAuthentication, BasicAuthentication]
     permission_classes = [IsAuthenticated]
     serializer_class = ResumeSerializer
 
     def list(self, request):
-        resume = Resume.objects.first()
-        if not resume:
+        latest_resume = Resume.objects.order_by("-date").first()
+        if not latest_resume:
             return Response(
                 {"detail": "Resume not found."}, status=status.HTTP_404_NOT_FOUND
             )
-        return Response(ResumeSerializer(resume).data, status=status.HTTP_200_OK)
+
+        serializer = ResumeSerializer(latest_resume)
+        return Response(serializer.data, status=status.HTTP_200_OK)
