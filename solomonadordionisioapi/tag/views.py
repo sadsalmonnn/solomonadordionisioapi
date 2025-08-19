@@ -1,8 +1,12 @@
+from rest_framework import viewsets
+from .models import Tag
+from .serializers import TagSerializer
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
-from rest_framework import serializers
-from .models import PersonalInfo
 
-class PersonalInfoSerializer(serializers.ModelSerializer):
+
+class ExperienceViewSet(viewsets.ModelViewSet):
+    queryset = Tag.objects.all()
+    serializer_class = TagSerializer
     authentication_classes = [SessionAuthentication, BasicAuthentication]
     permission_classes = [IsAuthenticated]

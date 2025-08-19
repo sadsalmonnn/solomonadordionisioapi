@@ -1,10 +1,12 @@
-from rest_framework import viewsets
-from .models import Links
-from .serializers import LinksSerializer
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
+from rest_framework import serializers
+from .models import Link
 
+class LinkSerializer(serializers.ModelSerializer):
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    permission_classes = [IsAuthenticated]
 
-class LinksViewSet(viewsets.ModelViewSet):
-    queryset = Links.objects.prefetch_related("links").all()
-    serializer_class = LinksSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    class Meta:
+        model = Link
+        fields = "__all__"

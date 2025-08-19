@@ -14,3 +14,4 @@ class PersonalInfo(models.Model):
   university = models.CharField(max_length=200)
   highschool = models.CharField(max_length=200)
   hobbies = models.ManyToManyField(Hobby, related_name="hobbies", blank=True)
+  

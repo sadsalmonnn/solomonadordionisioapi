@@ -1,10 +1,12 @@
 from rest_framework import viewsets
 from .models import Project
 from .serializers import ProjectSerializer
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 
 class ProjectViewSet(viewsets.ModelViewSet):
     queryset = Project.objects.prefetch_related("tags").all()
     serializer_class = ProjectSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    permission_classes = [IsAuthenticated]
