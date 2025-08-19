@@ -4,4 +4,5 @@ from .models import PersonalInfo
 class PersonalInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = PersonalInfo
-        fields = ['title', 'company', 'location', 'startdate', 'enddate', 'description']
+        fields = ['id', 'title', 'content']
+        read_only_fields = ["id"]

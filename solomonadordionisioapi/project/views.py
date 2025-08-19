@@ -6,7 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 
 
 class ProjectViewSet(viewsets.ModelViewSet):
-    queryset = Project.objects.prefetch_related("tags").all()
+    queryset = Project.objects.all()
     serializer_class = ProjectSerializer
     authentication_classes = [SessionAuthentication, BasicAuthentication]
     permission_classes = [IsAuthenticated]
