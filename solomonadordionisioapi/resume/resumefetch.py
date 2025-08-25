@@ -1,14 +1,26 @@
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
+import os
+import json
 
 
 def fetch_and_update_resume():
     try:
-        SERVICE_ACCOUNT_FILE = ".service_account_cred.json"
+        # SERVICE_ACCOUNT_FILE = ".service_account_cred.json"
+
+        # credentials = service_account.Credentials.from_service_account_file(
+        #     SERVICE_ACCOUNT_FILE, scopes=SCOPES
+        # )
+
+        SERVICE_ACCOUNT_JSON = os.getenv("SERVICE_ACCOUNT_KEY")  # set in Vercel
         SCOPES = ["https://www.googleapis.com/auth/drive"]
 
-        credentials = service_account.Credentials.from_service_account_file(
-            SERVICE_ACCOUNT_FILE, scopes=SCOPES
+        if not SERVICE_ACCOUNT_JSON:
+            raise ValueError("SERVICE_ACCOUNT_KEY not found in environment variables")
+
+        service_account_info = json.loads(SERVICE_ACCOUNT_JSON)
+        credentials = service_account.Credentials.from_service_account_info(
+            service_account_info, scopes=SCOPES
         )
 
         service = build("drive", "v3", credentials=credentials)
