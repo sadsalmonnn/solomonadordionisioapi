@@ -4,7 +4,7 @@ from googleapiclient.discovery import build
 
 def fetch_and_update_resume():
     try:
-        SERVICE_ACCOUNT_FILE = "../service_account_cred.json"
+        SERVICE_ACCOUNT_FILE = ".service_account_cred.json"
         SCOPES = ["https://www.googleapis.com/auth/drive"]
 
         credentials = service_account.Credentials.from_service_account_file(
