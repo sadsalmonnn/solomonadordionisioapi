@@ -6,12 +6,6 @@ import json
 
 def fetch_and_update_resume():
     try:
-        # SERVICE_ACCOUNT_FILE = ".service_account_cred.json"
-
-        # credentials = service_account.Credentials.from_service_account_file(
-        #     SERVICE_ACCOUNT_FILE, scopes=SCOPES
-        # )
-
         SERVICE_ACCOUNT_JSON = os.environ.get("SERVICE_ACCOUNT_KEY")
         SCOPES = ["https://www.googleapis.com/auth/drive"]
 

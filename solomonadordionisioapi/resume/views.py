@@ -16,6 +16,7 @@ class ResumeViewSet(viewsets.ViewSet):
         latest_resume = Resume.objects.order_by("-date").first()
         if not latest_resume:
             from . import resumefetch
+
             resumefetch.fetch_and_update_resume()
 
         latest_resume = Resume.objects.order_by("-date").first()
