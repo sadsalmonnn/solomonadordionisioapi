@@ -14,9 +14,10 @@ class ResumeViewSet(viewsets.ViewSet):
     def list(self, request):
         latest_resume = Resume.objects.order_by("-date").first()
         if not latest_resume:
-            return Response(
-                {"detail": "Resume not found."}, status=status.HTTP_404_NOT_FOUND
-            )
+            from . import resumefetch
+            resumefetch.fetch_and_update_resume()
+
+        latest_resume = Resume.objects.order_by("-date").first()
 
         serializer = ResumeSerializer(latest_resume)
         return Response(serializer.data, status=status.HTTP_200_OK)
