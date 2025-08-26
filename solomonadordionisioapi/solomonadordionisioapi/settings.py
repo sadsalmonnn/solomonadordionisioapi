@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 import dj_database_url
 # from dotenv import load_dotenv
 
@@ -20,6 +21,7 @@ import dj_database_url
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
@@ -27,10 +29,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-SECRET_KEY = "3213u21hufhdshuuhu32uhu2"
+DEBUG = os.environ.get("DEBUG", "False").lower() == "True"
+# SECRET_KEY = "3213u21hufhdshuuhu32uhu2"
 
-ALLOWED_HOSTS = ['.vercel.app', 'localhost', '127.0.0.1']
+SECRET_KEY = os.environ.get("SECRET_KEY")
+
+# ALLOWED_HOSTS = ['.vercel.app', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
 
 
 # Application definition
@@ -93,7 +98,9 @@ DATABASES = {
 
 }
 
-DATABASES['default'] = dj_database_url.parse("postgresql://solomonadordionisioapi_django_user:SYPORuOmfhoB6FlrDI9M8kgtO4oiPUTX@dpg-d2msciqdbo4c73f6ifd0-a.oregon-postgres.render.com/solomonadordionisioapi_django")
+database_url = os.environ.get("DATABASE_URL")
+
+DATABASES['default'] = dj_database_url.parse(database_url)
 
 
 # Password validation
