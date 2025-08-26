@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import dj_database_url
 # from dotenv import load_dotenv
 
 # load_dotenv()
@@ -84,11 +85,15 @@ WSGI_APPLICATION = "solomonadordionisioapi.wsgi.application"
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
+
 }
+
+DATABASES['default'] = dj_database_url.parse("postgresql://solomonadordionisioapi_django_user:SYPORuOmfhoB6FlrDI9M8kgtO4oiPUTX@dpg-d2msciqdbo4c73f6ifd0-a.oregon-postgres.render.com/solomonadordionisioapi_django")
 
 
 # Password validation

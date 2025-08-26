@@ -2,4 +2,4 @@
 .env
 
 __pycache__/
-*.json
+.service_account_cred.json
