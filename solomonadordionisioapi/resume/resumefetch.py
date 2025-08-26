@@ -12,7 +12,7 @@ def fetch_and_update_resume():
         #     SERVICE_ACCOUNT_FILE, scopes=SCOPES
         # )
 
-        SERVICE_ACCOUNT_JSON = os.getenv("SERVICE_ACCOUNT_KEY")  # set in Vercel
+        SERVICE_ACCOUNT_JSON = os.environ.get("SERVICE_ACCOUNT_KEY")
         SCOPES = ["https://www.googleapis.com/auth/drive"]
 
         if not SERVICE_ACCOUNT_JSON:
