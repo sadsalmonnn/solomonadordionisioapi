@@ -2,13 +2,14 @@ from rest_framework import viewsets, status
 from rest_framework.response import Response
 from .models import Resume
 from .serializer import ResumeSerializer
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
+from userauth.permissions import IsAdminOrReadOnly
+from dj_rest_auth.jwt_auth import JWTCookieAuthentication
 
 
 class ResumeViewSet(viewsets.ViewSet):
-    authentication_classes = [SessionAuthentication, BasicAuthentication]
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsAdminOrReadOnly]
+    authentication_classes = [JWTCookieAuthentication]
     serializer_class = ResumeSerializer
 
     def list(self, request):

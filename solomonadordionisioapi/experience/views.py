@@ -1,12 +1,13 @@
 from rest_framework import viewsets
 from .models import Experience
 from .serializers import ExperienceSerializer
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
-
+from userauth.permissions import IsAdminOrReadOnly
+from dj_rest_auth.jwt_auth import JWTCookieAuthentication
 
 class ExperienceViewSet(viewsets.ModelViewSet):
     queryset = Experience.objects.all()
     serializer_class = ExperienceSerializer
-    authentication_classes = [SessionAuthentication, BasicAuthentication]
-    permission_classes = [IsAuthenticated]
+
+    permission_classes = [IsAuthenticated, IsAdminOrReadOnly]
+    authentication_classes = [JWTCookieAuthentication]
