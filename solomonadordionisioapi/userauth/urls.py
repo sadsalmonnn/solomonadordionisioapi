@@ -8,6 +8,5 @@ from rest_framework.permissions import AllowAny
 urlpatterns = [
     path("login/", LoginView.as_view(), name="login"),
     path("logout/", LogoutView.as_view(), name="logout"),
-    # path("register/", include("dj_rest_auth.registration.urls")),
     path("register/", RegisterView.as_view(), name="register"),
 ]

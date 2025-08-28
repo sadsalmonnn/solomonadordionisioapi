@@ -25,17 +25,21 @@ router.register(r"tag", TagViewSet)
 
 @api_view(["GET"])
 def api_root(request, format=None):
-    return Response({
-        "experience": reverse("experience-list", request=request, format=format),
-        "project": reverse("project-list", request=request, format=format),
-        "resume": reverse("resume-list", request=request, format=format),
-        "links": reverse("link-list", request=request, format=format),
-        "personalinfo": reverse("personalinfo-list", request=request, format=format),
-        "tag": reverse("tag-list", request=request, format=format),
-        "auth_register": reverse("register", request=request, format=format),
-        "auth_login": reverse("login", request=request, format=format),
-        "auth_logout": reverse("logout", request=request, format=format),
-    })
+    return Response(
+        {
+            "experience": reverse("experience-list", request=request, format=format),
+            "project": reverse("project-list", request=request, format=format),
+            "resume": reverse("resume-list", request=request, format=format),
+            "links": reverse("link-list", request=request, format=format),
+            "personalinfo": reverse(
+                "personalinfo-list", request=request, format=format
+            ),
+            "tag": reverse("tag-list", request=request, format=format),
+            "auth_register": reverse("register", request=request, format=format),
+            "auth_login": reverse("login", request=request, format=format),
+            "auth_logout": reverse("logout", request=request, format=format),
+        }
+    )
 
 
 urlpatterns = [

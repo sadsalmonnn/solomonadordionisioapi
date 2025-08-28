@@ -115,9 +115,9 @@ REST_FRAMEWORK = {
         "dj_rest_auth.jwt_auth.JWTCookieAuthentication",
     ],
     "DEFAULT_PERMISSION_CLASSES": (
-         "rest_framework.permissions.AllowAny",
+        "rest_framework.permissions.AllowAny",
         #  "rest_framework.permissions.IsAuthenticated",
-        ),
+    ),
 }
 
 REST_USE_TOKEN = False
@@ -132,4 +132,3 @@ ACCOUNT_SIGNUP_FIELDS = ["username*", "email*", "password1*"]
 ACCOUNT_EMAIL_VERIFICATION = "none"
 
 ACCOUNT_LOGIN_METHOD = "username_email"
-
