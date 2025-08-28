@@ -37,6 +37,7 @@ router.register(r"links", LinkViewSet)
 router.register(r"personalinfo", PersonalInfoViewSet)
 router.register(r"tag", TagViewSet)
 
+
 urlpatterns = [
     path("", lambda request: redirect("api/", permanent=False)),
     path("admin/", admin.site.urls),

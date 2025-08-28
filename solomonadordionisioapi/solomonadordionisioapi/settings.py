@@ -31,12 +31,12 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # Third-party apps
     "rest_framework",
-    "rest_framework.authtoken",
     "dj_rest_auth",
     "dj_rest_auth.registration",
     "django.contrib.sites",
     "allauth",
     "allauth.account",
+    "rest_framework.authtoken",
     "allauth.socialaccount",
     # apps
     "experience",
@@ -114,9 +114,12 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "dj_rest_auth.jwt_auth.JWTCookieAuthentication",
     ],
-    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
+    "DEFAULT_PERMISSION_CLASSES": (
+        "rest_framework.permissions.IsAuthenticated",
+        ),
 }
 
+REST_USE_TOKEN = False
 REST_USE_JWT = True
 REST_AUTH = {
     "USE_JWT": True,
@@ -124,7 +127,8 @@ REST_AUTH = {
     "JWT_AUTH_REFRESH_COOKIE": "djangorefreshtoken_cookie",
 }
 
-SITE_ID = 1
+ACCOUNT_SIGNUP_FIELDS = ["username*", "email*", "password1*"]
 ACCOUNT_EMAIL_VERIFICATION = "none"
-ACCOUNT_LOGIN_METHODS = {"username", "email"}
-ACCOUNT_SIGNUP_FIELDS = ["username*", "email*", "password1*", "password2*"]
+
+ACCOUNT_LOGIN_METHOD = "username_email"
+
