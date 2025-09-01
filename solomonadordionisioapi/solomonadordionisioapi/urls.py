@@ -44,13 +44,13 @@ def api_root(request, format=None):
 
 urlpatterns = [
     # path("", lambda request: redirect("api/", permanent=False)),
-    # path("api/admin/", admin.site.urls),
-    # path("api/", api_root),
-    # path("api/", include(router.urls)),
-    # path("api/auth/", include("userauth.urls")),
+    path("api/admin/", admin.site.urls),
+    path("api/", api_root),
+    path("api/", include(router.urls)),
+    path("api/auth/", include("userauth.urls")),
 
-    path("admin/", admin.site.urls),
-    path("", api_root),
-    path("", include(router.urls)),
-    path("auth/", include("userauth.urls")),
+    # path("admin/", admin.site.urls),
+    # path("", api_root),
+    # path("", include(router.urls)),
+    # path("auth/", include("userauth.urls")),
 ]
