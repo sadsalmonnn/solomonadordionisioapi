@@ -19,33 +19,23 @@ def fetch_and_update_resume():
 
         service = build("drive", "v3", credentials=credentials)
 
-        file_metadata = (
+        file = (
             service.files()
             .get(
                 fileId="1UnaZwlVdjU4gxs4RSECZl6bKo8gx7P0RvL0p7woCjLA",
-                fields="modifiedTime",
+                fields="id, name, mimeType, webViewLink, thumbnailLink, modifiedTime",
             )
             .execute()
         )
-        date_modified = file_metadata.get("modifiedTime")
+        date_modified = file.get("modifiedTime")
 
-        resumefile_dic = (
-            service.files()
-            .download(
-                fileId="1UnaZwlVdjU4gxs4RSECZl6bKo8gx7P0RvL0p7woCjLA",
-                mimeType="application/pdf",
-            )
-            .execute()
-        )
-
-        download_uri = resumefile_dic["response"]["downloadUri"]
-        print(download_uri)
+        docLink = file.get('webViewLink')
 
         from .models import Resume
 
         last_resume = Resume.objects.order_by("-date").first()
         if not last_resume or last_resume.date != date_modified:
-            Resume.objects.create(resume_uri=download_uri, date=date_modified)
+            Resume.objects.create(resume_uri=docLink, date=date_modified)
 
     except Exception as e:
         print(f"Error fetching resume in ready(): {e}")
